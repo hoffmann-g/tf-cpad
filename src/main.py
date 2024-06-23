@@ -16,10 +16,10 @@ def main():
     df.info()
     df_first_1000 = df.head(1000)
     df_first_1000 = format_columns(df_first_1000)
-    replace_columns(df_first_1000)
+    # replace_columns(df_first_1000)
     print(df_first_1000)
 
-    # df_first_1000.to_csv(oputput_csv_file, sep=',', index=False, encoding='utf-8', escapechar='\n')
+    df_first_1000.to_csv("data/output.csv", sep=',', index=False, encoding='utf-8', escapechar='\n')
 
 if __name__ == '__main__':
     main()

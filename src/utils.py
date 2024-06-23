@@ -1,6 +1,6 @@
 from pandas import DataFrame
 
-f_columns={"SP_AA": "Ano", "SP_MM" : "Mês", "SP_UF" : "UF"}
+f_columns={"SP_AA": "Ano", "SP_MM" : "Mês", "UF_ZL" : "Municipio"}
 
 def format_columns(df: DataFrame) -> DataFrame:
     return df.rename(columns=f_columns)
