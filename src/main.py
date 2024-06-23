@@ -1,5 +1,4 @@
-from reader import from_dbf_to_dataframe 
-from utils import format_columns, replace_columns
+from utils import clear_data
 from pysus.ftp.databases.sih import SIH
 
 base_source = './data/'
@@ -15,8 +14,9 @@ def main():
     df = parquets.to_dataframe()
     df.info()
     df_first_1000 = df.head(1000)
-    df_first_1000 = format_columns(df_first_1000)
-    # replace_columns(df_first_1000)
+
+    df_first_1000 = clear_data(df_first_1000)
+    
     print(df_first_1000)
 
     df_first_1000.to_csv("data/output.csv", sep=',', index=False, encoding='utf-8', escapechar='\n')
