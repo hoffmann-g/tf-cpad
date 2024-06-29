@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# ENV
+*.env
+
+# CSV
+src/data/cleaned/csv/2019/
+src/data/cleaned/csv/2020/
+
 # C extensions
 *.so
 
