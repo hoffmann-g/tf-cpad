@@ -1,11 +1,11 @@
 from pandas import DataFrame, to_datetime
 
-f_columns={"UF_ZI": "Municipio",
+f_columns={"UF_ZI": "Cod_Zona_Municipio",
            "ESPEC": "Especialidade",
            "MUNIC_RES": "Municipio_Paciente",
            "QT_DIARIAS": "Diarias",
-           "DI_INTER": "Data_internacao",
-           "DT_SAIDA": "Data_saida",
+           "DT_INTER": "Data_Internacao",
+           "DT_SAIDA": "Data_Saida",
            "DIAG_PRINC": "Diagnostico",
            "DIAG_SECUN": "Diagnostico_Secundario",
            "COBRANCA": "Motivo_Saida_Permanencia",
@@ -38,7 +38,7 @@ f_columns={"UF_ZI": "Municipio",
            "TPDISEC8": "Tipo_Diagnostico_8",
            "TPDISEC9": "Tipo_Diagnostico_9"}
 
-d_columns = ["ANO_CMPT",
+to_be_removed_columns = ["ANO_CMPT",
              "MES_CMPT",
              "CGC_HOSP",
              "N_AIH",
@@ -116,51 +116,31 @@ d_columns = ["ANO_CMPT",
              "VAL_UCI",
              "MARCA_UCI"]
 
-# Colunas principais:
-# UF_ZI
-# ESPEC
-# MUNIC_RES
-# QT_DIARIAS
-# DI_INTER
-# DT_SAIDA
-# DIAG_PRINC
-# DIAG_SECUN
-# COBRANCA
 # COD_IDADE (2 = "Dias"; 3 = "Meses" ; 4 = "Anos"; 0 = "")
-# IDADE
-# DIAS_PERM
-# MORTE
-# NUM_FILHOS
-# INSTRU
-# CID_NOTIF
-# INFEHOSP
-# CID_ASSO
-# CID_MORTE
-# DIAGSEC1 a DIAGSEC9
-# TPDISEC1 a TPDISEC9
 
 # Limpeza dos dados:
-# 0. remove_usless
+# 0. remove_useless
 # 1. Retirar colunas zeradas           -> remove_empty()
 # 2. Renomear as colunas importantes   -> format_columns()
-# 3. Retirar linhas onde o valor de alguma das colunas importantes forem zeradas
-# 4. Retirar linhas com data saida ou data internacao diferentes do ano em questao (ex.: dados de 2015, porem tem linhas com datas em ano 2014)
+# 3. Retirar linhas onde o valor de alguma das colunas importantes forem zeradas -> dropna()
+# 4. Retirar linhas com data saida ou data entrada diferentes do ano em questao (ex.: dados de 2015, porem tem linhas com datas em ano 2014)
 # 5. Adicionar uma coluna com o ano, para permitir agrupamento mais facil no PowerBI
 # 6. Transformar idade: ou concatenar numero + label (ex 3 anos, 2 dias) ou padronizar (transformar tudo para a mesma unidade de medida)
 # 7. Analizar se QT_DIARIAS e DIAS_PERM sao iguais para todas as linhas
+# 8. Transformar a idade: passar tudo para anos
 
 def clear_data(df: DataFrame) -> DataFrame:
     # Remove colunas que nao nos interessam
-    df = remove_usless(df)
-    # Formata o nome das colunas
-    df = format_columns(df)
+    df = remove_useless(df)
     # Remove linhas com colunas sem informacao
     df = remove_empty(df)
+    # Formata o nome das colunas
+    df = format_columns(df)
     return df
 
-def remove_usless(df: DataFrame) -> DataFrame:
+def remove_useless(df: DataFrame) -> DataFrame:
     df = df.drop_duplicates()
-    return df.drop(columns=d_columns)
+    return df.drop(columns=to_be_removed_columns)
 
 def remove_empty(df: DataFrame) -> DataFrame:
     df = df.dropna()
@@ -168,15 +148,20 @@ def remove_empty(df: DataFrame) -> DataFrame:
 
 def format_columns(df: DataFrame) -> DataFrame:
     df = df.rename(columns=f_columns)
-    df = format_date(df)
+    # df = format_dates(df)
+    df = transform_age(df)
     df = map_zi_to_name(df)
     return df
 
-def format_date(df: DataFrame) -> DataFrame:
-    df['Data_saida'] = df['Data_saida'].apply(lambda x: to_datetime(x).strftime('%d/%m/%Y'))
-    #df['Data_internacao'] = df['Data_internacao'].apply(lambda x: to_datetime(x).strftime('%d/%m/%Y'))
+def format_dates(df: DataFrame) -> DataFrame:
+    df['Data_Saida'] = df['Data_Saida'].apply(lambda x: to_datetime(x).strftime('%d/%m/%Y'))
+    df['Data_Internacao'] = df['Data_Internacao'].apply(lambda x: to_datetime(x).strftime('%d/%m/%Y'))
     return df
 
 def map_zi_to_name(df: DataFrame) -> DataFrame:
     #TODO: Converter códigos da coluna municipio para o nome de fato
+    return df
+
+def transform_age(df: DataFrame) -> DataFrame:
+
     return df

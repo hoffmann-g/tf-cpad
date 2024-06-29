@@ -13,13 +13,13 @@ def main():
     parquets = sih.download(files, local_dir=base_source)
     df = parquets.to_dataframe()
     df.info()
-    df_first_1000 = df.head(1000)
+    df_head = df.head(10000)
 
-    df_first_1000 = clear_data(df_first_1000)
+    df_head = clear_data(df_head)
     
-    print(df_first_1000)
+    print(df_head)
 
-    df_first_1000.to_csv("data/output.csv", sep=',', index=False, encoding='utf-8', escapechar='\n')
+    df_head.to_csv("data/output.csv", sep=',', index=False, encoding='utf-8', escapechar='\n')
 
 if __name__ == '__main__':
     main()
