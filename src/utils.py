@@ -7,7 +7,6 @@ f_columns={"UF_ZI": "Cod_Zona_Municipio",
            "DT_INTER": "Data_Internacao",
            "DT_SAIDA": "Data_Saida",
            "DIAG_PRINC": "Diagnostico",
-        #    "": "Diagnostico_Secundario",
            "COBRANCA": "Motivo_Saida_Permanencia",
            "COD_IDADE": "Formato_Idade",
            "IDADE": "Idade",
@@ -98,23 +97,23 @@ to_be_removed_columns = ["ANO_CMPT",
              "VAL_SP_GES",
              "VAL_UCI",
              "MARCA_UCI",
-             "DIAGSEC1"
-            "DIAGSEC2"
-            "DIAGSEC3"
-            "DIAGSEC4"
-            "DIAGSEC5"
-            "DIAGSEC6"
-            "DIAGSEC7"
-            "DIAGSEC8"
-            "DIAGSEC9"
-            "TPDISEC1"
-            "TPDISEC2"
-            "TPDISEC3"
-            "TPDISEC4"
-            "TPDISEC5"
-            "TPDISEC6"
-            "TPDISEC7"
-            "TPDISEC8"
+             "DIAGSEC1",
+            "DIAGSEC2",
+            "DIAGSEC3",
+            "DIAGSEC4",
+            "DIAGSEC5",
+            "DIAGSEC6",
+            "DIAGSEC7",
+            "DIAGSEC8",
+            "DIAGSEC9",
+            "TPDISEC1",
+            "TPDISEC2",
+            "TPDISEC3",
+            "TPDISEC4",
+            "TPDISEC5",
+            "TPDISEC6",
+            "TPDISEC7",
+            "TPDISEC8",
             "TPDISEC9",
             "DIAG_SECUN"]
 
@@ -134,6 +133,8 @@ to_be_removed_columns = ["ANO_CMPT",
 def clear_data(df: DataFrame) -> DataFrame:
     # Remove colunas que nao nos interessam
     df = remove_useless(df)
+    #Renomeia as colunas importantes
+    df = df.rename(columns=f_columns)
     # Remove linhas com colunas sem informacao
     df = remove_empty(df)
     # Formata o nome das colunas
@@ -145,11 +146,12 @@ def remove_useless(df: DataFrame) -> DataFrame:
     return df.drop(columns=to_be_removed_columns)
 
 def remove_empty(df: DataFrame) -> DataFrame:
-    df = df.dropna()
+    key_columns=["Diagnostico", "Data_Internacao", "Data_Saida"]
+    # key_columns=["Diagnostico", "Data_Saida"]
+    df = df.dropna(subset=key_columns)
     return df
 
 def format_columns(df: DataFrame) -> DataFrame:
-    df = df.rename(columns=f_columns)
     # df = format_dates(df)
     df = transform_age(df)
     df = map_zi_to_name(df)

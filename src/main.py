@@ -13,6 +13,7 @@ def main():
     parquets = sih.download(files, local_dir=base_source)
     df = parquets.to_dataframe()
     df.info()
+    # df_head = df
     df_head = df.head(10000)
 
     df_head = clear_data(df_head)
