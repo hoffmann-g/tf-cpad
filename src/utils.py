@@ -7,7 +7,7 @@ f_columns={"UF_ZI": "Cod_Zona_Municipio",
            "DT_INTER": "Data_Internacao",
            "DT_SAIDA": "Data_Saida",
            "DIAG_PRINC": "Diagnostico",
-           "DIAG_SECUN": "Diagnostico_Secundario",
+        #    "": "Diagnostico_Secundario",
            "COBRANCA": "Motivo_Saida_Permanencia",
            "COD_IDADE": "Formato_Idade",
            "IDADE": "Idade",
@@ -18,25 +18,8 @@ f_columns={"UF_ZI": "Cod_Zona_Municipio",
            "CID_NOTIF": "CID_Notificacao",
            "INFEHOSP": "Infeccao_Hospitalar",
            "CID_ASSO": "CID_Causa",
-           "CID_MORTE": "CID_Morte",
-           "DIAGSEC1": "Diagnostico_Secundario_1",
-           "DIAGSEC2": "Diagnostico_Secundario_2",
-           "DIAGSEC3": "Diagnostico_Secundario_3",
-           "DIAGSEC4": "Diagnostico_Secundario_4",
-           "DIAGSEC5": "Diagnostico_Secundario_5",
-           "DIAGSEC6": "Diagnostico_Secundario_6",
-           "DIAGSEC7": "Diagnostico_Secundario_7",
-           "DIAGSEC8": "Diagnostico_Secundario_8",
-           "DIAGSEC9": "Diagnostico_Secundario_9",
-           "TPDISEC1": "Tipo_Diagnostico_1",
-           "TPDISEC2": "Tipo_Diagnostico_2",
-           "TPDISEC3": "Tipo_Diagnostico_3",
-           "TPDISEC4": "Tipo_Diagnostico_4",
-           "TPDISEC5": "Tipo_Diagnostico_5",
-           "TPDISEC6": "Tipo_Diagnostico_6",
-           "TPDISEC7": "Tipo_Diagnostico_7",
-           "TPDISEC8": "Tipo_Diagnostico_8",
-           "TPDISEC9": "Tipo_Diagnostico_9"}
+           "CID_MORTE": "CID_Morte"
+           }
 
 to_be_removed_columns = ["ANO_CMPT",
              "MES_CMPT",
@@ -72,7 +55,7 @@ to_be_removed_columns = ["ANO_CMPT",
              "VAL_TOT",
              "VAL_UTI",
              "US_TOT",
-             "DT_INTER",
+            #  "DT_INTER",
              "NATUREZA",
              "NAT_JUR",
              "GESTAO",
@@ -114,7 +97,26 @@ to_be_removed_columns = ["ANO_CMPT",
              "VAL_SH_GES",
              "VAL_SP_GES",
              "VAL_UCI",
-             "MARCA_UCI"]
+             "MARCA_UCI",
+             "DIAGSEC1"
+            "DIAGSEC2"
+            "DIAGSEC3"
+            "DIAGSEC4"
+            "DIAGSEC5"
+            "DIAGSEC6"
+            "DIAGSEC7"
+            "DIAGSEC8"
+            "DIAGSEC9"
+            "TPDISEC1"
+            "TPDISEC2"
+            "TPDISEC3"
+            "TPDISEC4"
+            "TPDISEC5"
+            "TPDISEC6"
+            "TPDISEC7"
+            "TPDISEC8"
+            "TPDISEC9",
+            "DIAG_SECUN"]
 
 # COD_IDADE (2 = "Dias"; 3 = "Meses" ; 4 = "Anos"; 0 = "")
 
