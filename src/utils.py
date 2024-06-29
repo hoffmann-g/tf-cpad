@@ -130,7 +130,7 @@ to_be_removed_columns = [
 # 7. Analizar se QT_DIARIAS e DIAS_PERM sao iguais para todas as linhas
 # 8. Transformar a idade: passar tudo para anos
 
-def clear_data(df: DataFrame) -> DataFrame:
+def pre_process_data(df: DataFrame) -> DataFrame:
     # Remove colunas que nao nos interessam
     df = remove_useless(df)
     #Renomeia as colunas importantes
@@ -153,8 +153,10 @@ def remove_empty(df: DataFrame) -> DataFrame:
 
 def format_columns(df: DataFrame) -> DataFrame:
     df = format_dates(df)
-    # df = transform_age(df)
-    df = map_zi_to_name(df)
+
+    df = data_translations(df)
+
+    # df = map_zi_to_name(df)
     return df
 
 def format_dates(df: DataFrame) -> DataFrame:
@@ -166,6 +168,17 @@ def map_zi_to_name(df: DataFrame) -> DataFrame:
     #TODO: Converter códigos da coluna municipio para o nome de fato
     return df
 
-def transform_age(df: DataFrame) -> DataFrame:
+def data_translations(df: DataFrame) -> DataFrame:
+    df = translate_gender(df)
+    df = translate_age_ident(df)
+    return df
 
+def translate_gender(df: DataFrame) -> DataFrame:
+    replacement_dict = {"1": 'M', "2": 'F', "3": 'F', "0": "", "9": ""}
+    df['Genero'] = df['Genero'].astype(str).replace(replacement_dict)
+    return df
+
+def translate_age_ident(df: DataFrame) -> DataFrame:
+    replacement_dict = {"2": "Dias", "3": "Meses", "4": "Anos", "0": "", "5": ""}
+    df['Formato_Idade'] = df['Formato_Idade'].replace(replacement_dict)
     return df
