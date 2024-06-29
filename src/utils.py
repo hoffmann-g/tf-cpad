@@ -8,7 +8,7 @@ f_columns={"UF_ZI": "Cod_Zona_Municipio",
            "DT_INTER": "Data_Internacao",
            "DT_SAIDA": "Data_Saida",
            "DIAG_PRINC": "Diagnostico",
-           "DIAS_PERM": "Permanencia",
+           "DIAS_PERM": "Dias_de_Internacao",
            "MORTE": "Morte",
            "COBRANCA": "Motivo_Saida"
            }
@@ -185,16 +185,16 @@ def translate_age_ident(df: DataFrame) -> DataFrame:
     return df
 
 def translate_reason(df: DataFrame) -> DataFrame:
-    replacement_dict = {"11":"Alta curado", "12":"Alta melhorado", "14":"Alta a pedido", "15":"Alta com previsão de retorno p/acomp do paciente",
-                        "16":"Alta por evasão", "18":"Alta por outros motivos", "19":"Alta de paciente agudo em psiquiatria",
-                        "21":"Permanência por características próprias da doença", "22":"Permanência por intercorrência",
-                        "23":"Permanência por impossibilidade sócio-familiar", "24":"Permanência proc doação órg, tec, cél-doador vivo",
-                        "25":"Permanência proc doação órg, tec, cél-doador morto", "26":"Permanência por mudança de procedimento",
-                        "27":"Permanência por reoperação", "28":"Permanência por outros motivos", "29":"Transferência para internação domiciliar",
-                        "32":"Transferência para internação domiciliar", "31":"Transferência para outro estabelecimento", "41":"Óbito com DO fornecida pelo médico assistente",
-                        "42":"Óbito com DO fornecida pelo IML", "43":"Óbito com DO fornecida pelo SVO", "51":"Encerramento administrativo",
-                        "61":"Alta da mãe/puérpera e do recém-nascido", "17":"Alta da mãe/puérpera e do recém-nascido", "62":"Alta da mãe/puérpera e permanência recém-nascido",
-                        "13":"Alta da mãe/puérpera e permanência recém-nascido", "63":"Alta da mãe/puérpera e óbito do recém-nascido", "64":"Alta da mãe/puérpera com óbito fetal",
-                        "65":"Óbito da gestante e do concepto", "66":"Óbito da mãe/puérpera e alta do recém-nascido", "67":"Óbito da mãe/puérpera e permanência recém-nascido"}
+    replacement_dict = {"11":"Alta curado", "12":"Alta melhorado", "14":"Alta a pedido", "15":"Alta com previsao de retorno p/acomp do paciente",
+                        "16":"Alta por evasao", "18":"Alta por outros motivos", "19":"Alta de paciente agudo em psiquiatria",
+                        "21":"Permanencia por caracteristicas proprias da doença", "22":"Permanencia por intercorrencia",
+                        "23":"Permanencia por impossibilidade socio-familiar", "24":"Permanencia proc doacao org, tec, cel-doador vivo",
+                        "25":"Permanencia proc doacao org, tec, cel-doador morto", "26":"Permanencia por mudança de procedimento",
+                        "27":"Permanencia por reoperacao", "28":"Permanencia por outros motivos", "29":"Transferencia para internacao domiciliar",
+                        "32":"Transferência para internação domiciliar", "31":"Transferencia para outro estabelecimento", "41":"Obito com DO fornecida pelo medico assistente",
+                        "42":"Obito com DO fornecida pelo IML", "43":"Obito com DO fornecida pelo SVO", "51":"Encerramento administrativo",
+                        "61":"Alta da mae/puerpera e do recem-nascido", "17":"Alta da mae/puerpera e do recem-nascido", "62":"Alta da mae/puerpera e permanencia recem-nascido",
+                        "13":"Alta da mae/puerpera e permanencia recem-nascido", "63":"Alta da mae/puerpera e obito do recem-nascido", "64":"Alta da mae/puerpera com obito fetal",
+                        "65":"Obito da gestante e do concepto", "66":"Obito da mae/puerpera e alta do recem-nascido", "67":"Obito da mae/puerpera e permanencia recem-nascido"}
     df['Motivo_Saida'] = df['Motivo_Saida'].replace(replacement_dict)
     return df
