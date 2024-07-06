@@ -12,7 +12,7 @@ The motivation of this project is to get the answer for the following business q
 - Were respiratory system diseases more prevalent in 2020?
 - Has there been an increase in the use of ICU beds post-2019?
 
-# Techinologies used
+# Technologies used
 - Python
 - Pandas
 - Jupyter Notebook
