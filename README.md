@@ -21,6 +21,6 @@ The motivation of this project is to get the answer for the following business q
 
 # Authors
 
-Arthur Kunzler
-Guilherme Dornelles
-Guilherme Hoffmann
+- Arthur Kunzler
+- Guilherme Dornelles
+- Guilherme Hoffmann
